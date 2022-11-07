@@ -51,7 +51,7 @@ const Disconnected: FC = () => {
           onClick={handleClick}
         >
           <HStack>
-            <Text>Be Anybodies</Text>
+            <Text>Enter The Island</Text>
             <ArrowForwardIcon />
           </HStack>
         </Button>
