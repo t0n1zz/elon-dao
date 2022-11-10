@@ -1,4 +1,4 @@
-require("@solana/wallet-adapter-react-ui/styles.css")
+
 import { FC, ReactNode } from "react"
 import {
   ConnectionProvider,
