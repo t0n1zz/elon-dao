@@ -1,56 +1,28 @@
-import { Box, Center, Spacer, Stack } from "@chakra-ui/react"
-import type { NextPage } from "next"
-import Head from "next/head"
-import styles from "../styles/Home.module.css"
-import NavBar from "../components/NavBar"
-import Disconnected from '../components/Disconnected'
+import type { NextPage } from 'next'
+import Head from 'next/head'
+import Image from 'next/image'
+import Footer from '../components/Footer'
+import Header from '../components/Header'
+import Map from '../components/Map'
 import { useWallet } from "@solana/wallet-adapter-react"
-import Connected from "../components/Connected"
 
 const Home: NextPage = () => {
   const { connected } = useWallet()
 
   return (
-    <div className={styles.container}>
+    <div>
       <Head>
-        <title>ElonDao</title>
-        <meta name="First DAO for Anybodies" />
+        <title>Elon Dao</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <Box
-        w="full"
-        h="calc(100vh)"
-        background="black"
-        backgroundPosition="center"
-      >
-        <Stack
-          w="full"
-          h="calc(100vh)"
-          justify="center"
-        >
-          <NavBar />
+      <Header />
 
-          <Spacer />
+      <main>
+        <Map /> 
+      </main>
 
-          <Center>{connected ? <Connected /> : <Disconnected />}</Center>
-
-          <Spacer />
-
-          <Center>
-            <Box marginBottom={4} color="white">
-              <a
-                href="https://twitter.com/AnybodiesDAO"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                by ElonDao for Anybodies
-              </a>
-            </Box>
-          </Center>
-
-        </Stack>
-      </Box>
+      <Footer />
     </div>
   )
 }
