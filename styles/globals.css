@@ -1,3 +1,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  [type='button'],
+  [type='reset'],
+  [type='submit'] {
+    background-color: #512da8;
+  }
+}
