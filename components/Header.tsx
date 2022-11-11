@@ -1,10 +1,12 @@
-import { FC } from "react"
+import { FC, useState } from "react"
 import Image from 'next/image'
 import islandLogo from '../public/islandLogo.png'
 import dynamic from 'next/dynamic';
 import { WalletMultiButton } from "@solana/wallet-adapter-react-ui"
+import { PlusCircleIcon } from '@heroicons/react/20/solid'
 
-const Header: FC = () => {
+const Header: FC = ( toggle ) => {
+
   const WalletMultiButtonDynamic = dynamic(
     async () => (await import('@solana/wallet-adapter-react-ui')).WalletMultiButton,
     { ssr: false }
@@ -26,7 +28,7 @@ const Header: FC = () => {
       {/* middle */}
       <div className="md:basis-1/2 hidden md:inline">
         <div className="flex items-center space-x-2">
-          <div className=" bg-gray-700 p-2 text-white w-8 h-8 rounded-full flex justify-center items-center">1</div>
+          <div className=" bg-gray-700 p-2 text-white w-8 h-8 rounded-full flex justify-center items-center ">1</div>
           <p>Connect your wallet</p>
           <div className=" bg-gray-700 p-2 text-white w-8 h-8 rounded-full flex justify-center items-center">2</div>
           <p>Add your information</p>
@@ -36,7 +38,8 @@ const Header: FC = () => {
       </div>
 
       {/* right */}
-      <div className="md:basis-1/4 flex items-center space-x-4 justify-end">
+      <div className="md:basis-1/4 flex items-center space-x-2 justify-end">
+        <PlusCircleIcon className="w-14 cursor-pointer text-blue-900 hover:text-black" onClick={toggle}/>
         <WalletMultiButtonDynamic />
       </div>
     </header>

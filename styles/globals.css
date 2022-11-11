@@ -12,3 +12,10 @@
         background-color: #512da8;
   }
 }
+
+/* @import “tailwindcss/base”;
+
+@import "@solana/wallet-adapter-react-ui/styles.css";
+
+@import “tailwindcss/components”;
+@import “tailwindcss/utilities”; */
