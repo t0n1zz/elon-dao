@@ -39,7 +39,6 @@ const Header: FC = ( toggle ) => {
 
       {/* right */}
       <div className="md:basis-1/4 flex items-center space-x-2 justify-end">
-        <PlusCircleIcon className="w-14 cursor-pointer text-blue-900 hover:text-black" onClick={toggle}/>
         <WalletMultiButtonDynamic />
       </div>
     </header>

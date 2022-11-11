@@ -22,7 +22,7 @@ const Home: NextPage = () => {
     { ssr: false }
   );
 
-  function toggle() {
+  const toggle = () => {
     setShowProfile(!showProfile);
   }
 
