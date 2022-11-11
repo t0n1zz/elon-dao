@@ -1,9 +1,10 @@
-import { useWallet } from "@solana/wallet-adapter-react"
 import type { NextPage } from 'next'
+import { useWallet } from "@solana/wallet-adapter-react"
 import Head from 'next/head'
 import Header from '../components/Header'
-import Map from '../components/Map'
+import Disconnected from '../components/Disconnected'
 import Footer from '../components/Footer'
+import Connected from '../components/Connected'
 
 const Home: NextPage = () => {
   const { connected } = useWallet()
@@ -15,12 +16,15 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
+      {/* header */}
       <Header />
 
+      {/* main */}
       <main>
-        <Map /> 
+        {connected ? <Connected /> : <Disconnected />}
       </main>
 
+      {/* footer */}
       <Footer />
     </div>
   )

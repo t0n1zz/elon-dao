@@ -2,10 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer base {
+@import "@solana/wallet-adapter-react-ui/styles.css";
+
+
+/* @layer base {
   [type='button'],
   [type='reset'],
   [type='submit'] {
-    background-color: #512da8;
+        background-color: #512da8;
   }
-}
+} */

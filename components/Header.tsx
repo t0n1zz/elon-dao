@@ -13,7 +13,7 @@ const Header: FC = () => {
   return (
     <header className="sticky top-0 z-50 flex flex-row bg-white shadow-md p-5 md:px-10">
       {/* left */}
-      <div className="md:basis-1/4 relative flex items-center h-10 cursor-pointer my-auto">
+      <div className="md:basis-1/4  relative flex items-center h-10 cursor-pointer my-auto">
         <Image 
           src={islandLogo}
           alt="islandLogo"
