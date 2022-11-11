@@ -63,8 +63,8 @@ const Home: NextPage = () => {
           {connected 
             ? <>
                 {showProfile 
-                  ? <XCircleIcon className="w-14 cursor-pointer text-gray-600 hover:text-gray-800" onClick={toggle}/>
-                  : <PlusCircleIcon className="w-14 cursor-pointer text-gray-600 hover:text-gray-800" onClick={toggle}/>}
+                  ? <XCircleIcon className="w-14 cursor-pointer text-gray-600 hover:text-gray-800" onClick={toggle} />
+                  : <PlusCircleIcon className="w-14 cursor-pointer text-gray-600 hover:text-gray-800" onClick={toggle} />}
               </>
             : <></>}
           
