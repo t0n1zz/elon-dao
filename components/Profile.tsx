@@ -1,4 +1,5 @@
 import { FC } from "react"
+import { FetchNft } from "./FetchNft"
 
 const Profile: FC = () => {
 
@@ -39,7 +40,7 @@ const Profile: FC = () => {
             </div>
           </div>
 
-          <div className="mb-5 flex flex-row space-x-4 justify-center"> 
+          <div className="mb-10 flex flex-row space-x-4 justify-center"> 
             <div className="inline-flex">
               <svg
                 className="w-6 h-6 text-blue-300 fill-current mr-3"
@@ -60,6 +61,11 @@ const Profile: FC = () => {
               </svg>
               <input className="w-50 shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="username" type="text" placeholder="Id" />
             </div>
+          </div>
+
+          <div className="mb-5">
+            <label className="block font-bold text-gray-700 text-xs">Select your PFP</label>
+            <FetchNft />
           </div>
         </div>
       </div>
