@@ -3,13 +3,28 @@ import { Metaplex, walletAdapterIdentity } from "@metaplex-foundation/js"
 import { FC, useEffect, useState } from "react"
 
 export const FetchNft: FC = () => {
-  const [nftData, setNftData] = useState(null)
+  interface OffChainData {
+    name: string,
+    description: string,
+    image: string,
+    attributes: 
+      {
+        trait_type: string
+          value: string 
+        }[],
+  }
+
+  const [nftData, setNftData] = useState<OffChainData[]>()
   const { connection } = useConnection()
   const wallet = useWallet()
   const metaplex = Metaplex.make(connection).use(walletAdapterIdentity(wallet))
 
   const fetchNfts = async () => {
     if (!wallet.connected) {
+      return
+    }
+
+    if (!wallet.publicKey) {
       return
     }
 
@@ -28,8 +43,6 @@ export const FetchNft: FC = () => {
 
     // set state
     setNftData(nftData)
-
-    console.log(nftData)
   }
 
   // fetch nfts when connected wallet changes

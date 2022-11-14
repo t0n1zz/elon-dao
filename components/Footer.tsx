@@ -14,11 +14,13 @@ const Footer: FC = () => {
      <div className="hidden md:inline">
       <div className="flex items-center justify-center space-x-4 pt-5">
           <p>Brought to you by</p>
-          <Image 
-            src={elonDAOLogo}
-            alt="elonDaoLogo"
-          />
-          <p>Developed by PamanBeruang</p>
+          <a href="https://twitter.com/AnybodiesDAO" target="_blank">
+            <Image 
+              src={elonDAOLogo}
+              alt="elonDaoLogo"
+            />
+          </a>
+          <p>Developed by  <a href="https://twitter.com/t0n1zz" target="_blank">PamanBeruang</a></p>
       </div>
      </div>
 
@@ -26,12 +28,14 @@ const Footer: FC = () => {
      <div className="md:hidden">
       <div className="text-center pt-5">
         <p>Brought to you by</p>
-        <Image 
-          src={elonDAOLogo}
-          alt="elonDaoLogo"
-          className="mx-auto pt-2 pb-2"
-        />
-        <p>Developed by PamanBeruang</p>
+        <a href="https://twitter.com/AnybodiesDAO" target="_blank">
+          <Image 
+            src={elonDAOLogo}
+            alt="elonDaoLogo"
+            className="mx-auto pt-2 pb-2"
+          />
+        </a>
+        <p>Developed by <a href="https://twitter.com/t0n1zz" target="_blank">PamanBeruang</a></p>
       </div>
      </div>
     </footer>

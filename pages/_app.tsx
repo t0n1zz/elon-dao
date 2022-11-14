@@ -1,6 +1,7 @@
 import '../styles/globals.css'
-import WalletContextProvider from '../components/WalletContextProvider'
 import type { AppProps } from 'next/app'
+
+import WalletContextProvider from '../components/WalletContextProvider'
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
