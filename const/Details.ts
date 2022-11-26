@@ -1,5 +1,7 @@
 // Replace this with your contract address
-export const programAddress = "GZttphkwJbruZm59cwpCUwxLEek8FMzGEsDPS9ujQ2rN";
+export const programAddress = process.env.NEXT_PUBLIC_PROGRAM_ADDRESS!;
 
 // Replace this with your domain name.
-export const domainName = "elon-dao.vercel.app/";
+export const domainName = process.env.NEXT_PUBLIC_DOMAIN_NAME!;
+
+export const networkName = process.env.NEXT_PUBLIC_NETWORK!
