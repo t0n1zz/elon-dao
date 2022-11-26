@@ -2,8 +2,6 @@ import { FC, useState } from "react"
 import Image from 'next/image'
 import islandLogo from '../public/islandLogo.png'
 import dynamic from 'next/dynamic';
-import { WalletMultiButton } from "@solana/wallet-adapter-react-ui"
-import { PlusCircleIcon } from '@heroicons/react/20/solid'
 
 const Header: FC = ( toggle ) => {
 

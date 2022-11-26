@@ -14,12 +14,17 @@ const Profile: FC = () => {
       const user = await getUser(req);
     
       if (!user) {
-        return {
-          redirect: {
-            destination: "/login",
-            permanent: false,
-          },
-        };
+        return (
+          <>
+          <div className="fixed inset-0 bg-white bg-opacity-80 overflow-y-auto h-full w-full">
+            <div className="relative top-20 mx-auto p-5">
+              <div className="mt-9 text-center">
+                <label className="block text-lg font-bold mt-5">Sorry you need to login first</label>
+              </div>
+            </div>
+          </div>
+        </>
+        );
       }
     
       const program = await sdk.getNFTDrop(programAddress);
