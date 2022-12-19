@@ -7,21 +7,16 @@ import { WalletModalProvider } from "@solana/wallet-adapter-react-ui";
 import { domainName, networkName } from '../const/Details';
 require("@solana/wallet-adapter-react-ui/styles.css");
 
-export const network: Network = networkName;
+import { SessionProvider } from "next-auth/react";
+import { Session } from 'inspector';
 
-function MyApp({ Component, pageProps }: AppProps) {
+// export const network: Network = networkName;
+
+function MyApp({ Component, pageProps }: AppProps<{session:Session;}>) {
   return (
-    <ThirdwebProvider
-      authConfig={{
-        authUrl: "/api/auth",
-        domain: process.env.VERCEL_URL || domainName,
-      }}
-      network={network}
-    >
-      <WalletModalProvider>
-        <Component {...pageProps} />
-      </WalletModalProvider>
-    </ThirdwebProvider>
+    <SessionProvider session={pageProps.session}>
+      <Component {...pageProps} />
+    </SessionProvider>
   )
 }
 

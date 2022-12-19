@@ -1,40 +1,26 @@
 import type { NextPage } from 'next'
-import Image from 'next/image'
-import { useState } from "react"
-import { useWallet } from "@solana/wallet-adapter-react"
 import Head from 'next/head'
 import Footer from '../components/Footer'
 import Map from '../components/Map'
-import Profile from '../components/Profile'
 
+import Header from '../components/Header'
+import { useRouter } from 'next/router'
+import { useSession } from "next-auth/react";
+import { useEffect } from 'react'
+
+import Image from 'next/image'
 import islandLogo from '../public/islandLogo.png'
 import dynamic from 'next/dynamic';
-import { PlusCircleIcon } from '@heroicons/react/20/solid'
-import { XCircleIcon } from '@heroicons/react/20/solid'
 
-import {
-  useClaimNFT,
-  useLogin,
-  useLogout,
-  useProgram,
-  useUser,
-} from "@thirdweb-dev/react/solana";
+import LoginBtn from "../components/loginBtn/loginBtn";
 
 const Home: NextPage = () => {
-  const { publicKey } = useWallet();
-  const { user, isLoading: userLoading } = useUser();
-  const login = useLogin();
-  const logout = useLogout();
-  const [showProfile, setShowProfile] = useState(false)
+  const router = useRouter();
+  const { data: session, status } = useSession();
 
-  const WalletMultiButtonDynamic = dynamic(
-    async () => (await import('@solana/wallet-adapter-react-ui')).WalletMultiButton,
-    { ssr: false }
-  );
-
-  const toggle = () => {
-    setShowProfile(!showProfile);
-  }
+  useEffect(() => {
+    session && status === "authenticated" && router.push("./user");
+  }, [session, status]);
 
   return (
     <div>
@@ -60,7 +46,7 @@ const Home: NextPage = () => {
         <div className="md:basis-1/2 hidden md:inline">
           <div className="flex items-center space-x-2">
             <div className=" bg-gray-700 p-2 text-white w-8 h-8 rounded-full flex justify-center items-center ">1</div>
-            <p>Connect your wallet and login</p>
+            <p>Login</p>
             <div className=" bg-gray-700 p-2 text-white w-8 h-8 rounded-full flex justify-center items-center">2</div>
             <p>Add your information</p>
             <div className=" bg-gray-700 p-2 text-white w-8 h-8 rounded-full flex justify-center items-center">3</div>
@@ -70,32 +56,18 @@ const Home: NextPage = () => {
 
         {/* right */}
         <div className="md:basis-1/4 flex items-center space-x-2 justify-end">
-        {publicKey && !user && (
-            <button className="inline-block rounded-sm bg-blue-600 px-4 py-1.5 text-base font-semibold leading-7 text-white shadow-sm ring-1 ring-blue-600 hover:bg-blue-700 hover:ring-blue-700" onClick={() => login()}>
-              Login
-            </button>
+          {!session ? (
+            <LoginBtn />
+          ) : (
+            <>Loading...</>
           )}
 
-          {publicKey && user
-            ? <>
-                {showProfile 
-                  ? <XCircleIcon className="w-14 cursor-pointer text-gray-600 hover:text-gray-800" onClick={toggle} />
-                  : <PlusCircleIcon className="w-14 cursor-pointer text-gray-600 hover:text-gray-800" onClick={toggle} />}
-
-                <button className="inline-block rounded- bg-blue-600 px-4 py-1.5 text-base font-semibold leading-7 text-white shadow-sm ring-1 ring-blue-600 hover:bg-blue-700 hover:ring-blue-700"  onClick={() => logout()}>
-                  Logout
-                </button>
-              </>
-            : <></>}
-
-          <WalletMultiButtonDynamic />
         </div>
       </header>
 
       {/* main */}
       <main>
         <Map />
-        {showProfile ? <Profile /> : ''}
       </main>
 
       {/* footer */}

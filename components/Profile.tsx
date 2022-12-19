@@ -29,6 +29,8 @@ const Profile: FC = () => {
     
       const program = await sdk.getNFTDrop(programAddress);
       const nfts = await program?.getAllClaimed();
+
+      console.log(nfts);
     
       const hasNFT = nfts?.some((nft) => nft.owner === user.address);
     
