@@ -1,4 +1,6 @@
 export const NFTList = [
+  '3wtV9G27ZEDjBTTtzbzxnwN9jsiQxMYeTgyg8t9NBkoj',
+  '4aefKtWZDWjAco87xYxVcox5EB6mzuVVJ1RREt6ts2KB',
   'BS7y7PWDcxhgozc3cK11hu3TSBeitR6VpkRC5HHg1UP6',  
   '2RZhbMkTA16qn9TcV55NakdSjAF4kxYZDaHbC3PFu2Fo',  
   'EaM3LtogDpvW7J9mc5PCDEUAVp4YUz31gYrk2zg3QMi1',  

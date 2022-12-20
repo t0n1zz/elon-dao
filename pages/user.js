@@ -194,11 +194,11 @@ export default function User({ userSession, isAutorized, nftList }) {
                         <div class="flex flex-wrap -m-1 md:-m-2">
                           {nftList &&
                             nftList.map((item, i) => (
-                              <div class="flex flex-wrap w-1/3" key={i}>
-                                <div class="w-full p-1 md:p-2 cursor-pointer">
-                                  <img alt="gallery" class="block object-cover object-center w-full h-full rounded-lg" src={item.image} />
+                                <div class="flex flex-wrap w-1/3" key={i}>
+                                  <div class="w-full p-1 md:p-2 cursor-pointer">
+                                    <img alt="gallery" class="block object-cover object-center w-full h-full rounded-lg" src={item.image} />
+                                  </div>
                                 </div>
-                              </div>
                             ))
                           }
                         </div>
