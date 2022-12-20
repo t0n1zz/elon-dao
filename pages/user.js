@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import { useRouter } from "next/router";
 import Image from "next/image";
 import { getSession } from "next-auth/react";
@@ -7,10 +7,13 @@ import axios from "axios";
 
 import Head from 'next/head'
 import Footer from '../components/Footer'
-import Map from '../components/Map'
+import Map from '../components/Map';
 
 import islandLogo from '../public/islandLogo.png'
 import { NFTList } from "../const/NFTList";
+
+import Select from 'react-select'
+import countryList from 'react-select-country-list'
 
 export async function getServerSideProps(context) {
   const session = await getSession(context);
@@ -22,7 +25,7 @@ export async function getServerSideProps(context) {
       address: session.user.address,
     };
     const result = await axios.post(
-      "http://localhost:3000/api/solanaAPI/getNFTs",
+      process.env.NEXTAUTH_URL + "/api/solanaAPI/getNFTs",
       options,
       {
         headers: {
@@ -40,7 +43,7 @@ export async function getServerSideProps(context) {
           isAutorized = true;
 
           const resultMetadata = await axios.post(
-            "http://localhost:3000/api/solanaAPI/getNFTMetadata",
+            process.env.NEXTAUTH_URL + "/api/solanaAPI/getNFTMetadata",
             {
               network: "mainnet",
               address: item.mint,
@@ -69,8 +72,14 @@ export async function getServerSideProps(context) {
   };
 }
 
-export default function Home({ userSession, isAutorized, nftList }) {
+export default function User({ userSession, isAutorized, nftList }) {
   const router = useRouter();
+  const [countryValue, setCountryValue] = useState('')
+  const countrySelectOption = useMemo(() => countryList().getData(), [])
+
+  const changeHandler = value => {
+    setCountryValue(value)
+  }
 
   useEffect(() => {
     !userSession ? router.push("/") : console.log(userSession);
@@ -136,9 +145,7 @@ export default function Home({ userSession, isAutorized, nftList }) {
                   <div className="mb-5">
                     <label className="block font-bold text-gray-700 text-xs">Country</label>
                     <div className="inline-block relative w-80">
-                      <select className="block appearance-none w-full py-2 px-3 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
-                        <option disabled>Select country</option>
-                      </select>
+                      <Select options={countrySelectOption} value={countryValue} onChange={changeHandler} />
                       <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
                         <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
                       </div>
@@ -187,11 +194,9 @@ export default function Home({ userSession, isAutorized, nftList }) {
                         <div class="flex flex-wrap -m-1 md:-m-2">
                           {nftList &&
                             nftList.map((item, i) => (
-                              <div key={i}>
-                                <div class="flex flex-wrap w-1/3">
-                                  <div class="w-full p-1 md:p-2">
-                                    <img alt="gallery" class="block object-cover object-center w-full h-full rounded-lg" src={item.image} />
-                                  </div>
+                              <div class="flex flex-wrap w-1/3" key={i}>
+                                <div class="w-full p-1 md:p-2 cursor-pointer">
+                                  <img alt="gallery" class="block object-cover object-center w-full h-full rounded-lg" src={item.image} />
                                 </div>
                               </div>
                             ))
@@ -214,7 +219,7 @@ export default function Home({ userSession, isAutorized, nftList }) {
         </main>
 
         {/* footer */}
-        <Footer />
+        {/* <Footer /> */}
 
       </div>
     );
