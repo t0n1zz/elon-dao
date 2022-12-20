@@ -189,14 +189,14 @@ export default function User({ userSession, isAutorized, nftList }) {
     
                   <div className="mb-5">
                     <label className="block font-bold text-gray-700 text-xs">Select your PFP</label>
-                    <section class="overflow-hidden text-gray-700 ">
-                      <div class="container px-5 py-2 mx-auto lg:pt-12 lg:px-32">
-                        <div class="flex flex-wrap -m-1 md:-m-2">
+                    <section className="overflow-hidden text-gray-700 ">
+                      <div className="container px-5 py-2 mx-auto lg:pt-12 lg:px-32">
+                        <div className="flex flex-wrap -m-1 md:-m-2">
                           {nftList &&
                             nftList.map((item, i) => (
-                                <div class="flex flex-wrap w-1/3" key={i}>
-                                  <div class="w-full p-1 md:p-2 cursor-pointer">
-                                    <img alt="gallery" class="block object-cover object-center w-full h-full rounded-lg" src={item.image} />
+                                <div classname="flex flex-wrap w-1/3" key={i}>
+                                  <div classname="w-full p-1 md:p-2 cursor-pointer">
+                                    <img alt="gallery" classname="block object-cover object-center w-full h-full rounded-lg" src={item.image} />
                                   </div>
                                 </div>
                             ))
