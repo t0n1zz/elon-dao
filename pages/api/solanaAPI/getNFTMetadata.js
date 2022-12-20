@@ -1,9 +1,6 @@
 import Moralis from "moralis";
 
 export default async function handler(req, res) {
-  Moralis.start({
-    apiKey: process.env.MORALIS_API_KEY,
-  });
 
   const { network, address } = req.body;
 
