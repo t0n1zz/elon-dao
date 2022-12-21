@@ -7,7 +7,8 @@ const Footer: FC = () => {
 
   return (
     <footer className="text-center p-5">
-     <p>Visually see Anybodies holder around you</p>
+     <hr /> 
+     <p className="mt-5">Visually see Anybodies holder around you</p>
      <p>Ease meet-ups with fellow Anybodies</p>
 
      {/* desktop */}
