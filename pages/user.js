@@ -73,10 +73,21 @@ export async function getServerSideProps(context) {
 
 export default function User({ userSession, isAutorized, nftList }) {
   const router = useRouter();
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     !userSession ? router.push("/") : console.log(userSession);
-  }, [userSession]);
+
+    router.events.on("routeChangeError", (e) => setLoading(false));
+    router.events.on("routeChangeStart", (e) => setLoading(false));
+    router.events.on("routeChangeComplete", (e) => setLoading(true));
+
+    return () => {
+      router.events.off("routeChangeError", (e) => setLoading(false));
+      router.events.off("routeChangeStart", (e) => setLoading(false));
+      router.events.off("routeChangeComplete", (e) => setLoading(true));
+    };
+  }, [userSession, router.events]);
 
   console.log(nftList);
 
@@ -115,13 +126,22 @@ export default function User({ userSession, isAutorized, nftList }) {
 
           {/* right */}
           <div className="md:basis-1/4 flex items-center space-x-2 justify-end">
-            <Link href={"/"} passHref>
-              <button className="inline-block rounded-sm bg-blue-600 px-4 py-1.5 text-base font-semibold leading-7 text-white shadow-sm ring-1 ring-blue-600 hover:bg-blue-700 hover:ring-blue-700"
-              >
-                Home
-              </button> 
-            </Link>
-            <LogoutBtn />
+          {!loading ? 
+            <button className="inline-block rounded-sm bg-blue-600 px-4 py-1.5 text-base font-semibold leading-7 text-white shadow-sm ring-1 ring-blue-600 hover:bg-blue-700 hover:ring-blue-700" disabled
+            >
+              Loading...
+            </button>
+            :
+            <>
+              <Link href={"/"} passHref>
+                <button className="inline-block rounded-sm bg-blue-600 px-4 py-1.5 text-base font-semibold leading-7 text-white shadow-sm ring-1 ring-blue-600 hover:bg-blue-700 hover:ring-blue-700"
+                >
+                  Home
+                </button> 
+              </Link>
+              <LogoutBtn />
+            </>
+          }
           </div>
         </header>
 
