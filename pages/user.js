@@ -112,7 +112,7 @@ export default function User({ userSession, isAutorized, nftList }) {
           <div className="md:basis-1/2 hidden md:inline">
             <div className="flex items-center space-x-2">
               <div className=" bg-gray-700 p-2 text-white w-8 h-8 rounded-full flex justify-center items-center ">1</div>
-              <p>Login</p>
+              <p>Login go to Profile</p>
               <div className=" bg-gray-700 p-2 text-white w-8 h-8 rounded-full flex justify-center items-center">2</div>
               <p>Add your information</p>
               <div className=" bg-gray-700 p-2 text-white w-8 h-8 rounded-full flex justify-center items-center">3</div>

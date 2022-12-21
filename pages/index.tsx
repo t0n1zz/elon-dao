@@ -3,7 +3,6 @@ import Head from 'next/head'
 import Footer from '../components/Footer'
 import Map from '../components/Map'
 
-import Header from '../components/Header'
 import { useRouter } from 'next/router'
 import { useSession } from "next-auth/react";
 import { useEffect, useState } from 'react'
@@ -60,7 +59,7 @@ const Home: NextPage = () => {
         <div className="md:basis-1/2 hidden md:inline">
           <div className="flex items-center space-x-2">
             <div className=" bg-gray-700 p-2 text-white w-8 h-8 rounded-full flex justify-center items-center ">1</div>
-            <p>Login</p>
+            <p>Login go to Profile</p>
             <div className=" bg-gray-700 p-2 text-white w-8 h-8 rounded-full flex justify-center items-center">2</div>
             <p>Add your information</p>
             <div className=" bg-gray-700 p-2 text-white w-8 h-8 rounded-full flex justify-center items-center">3</div>
