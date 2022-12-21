@@ -12,7 +12,7 @@ const pinStyle = {
 
 function Pin({size = 20}) {
   return (
-    <svg height={size} viewBox="0 0 45 42.19" style={pinStyle} stroke>
+    <svg height={size} viewBox="0 0 45 42.19" style={pinStyle}>
       <path d={ICON} />
     </svg>
   );
