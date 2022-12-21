@@ -34,8 +34,6 @@ const Home: NextPage = () => {
     };
   }, [session, status, router.events]);
 
-  console.log(loading);
-
   return (
     <div>
       <Head>

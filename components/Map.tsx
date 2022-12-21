@@ -12,7 +12,14 @@ import CITIES from '../components/map/exampleData.json'
 import Pin from '../components/map/pin'
 
 export default function App()  {
-  const [popupInfo, setPopupInfo] = useState(null);
+  const [popupInfo, setPopupInfo] = useState({
+    city: '',
+    population: '',
+    image: '',
+    state: '',
+    latitude: 0,
+    longitude: 0
+  });
   const [viewState, setViewState] = useState({
     latitude: 40,
     longitude: -100,
@@ -33,7 +40,7 @@ export default function App()  {
             // If we let the click event propagates to the map, it will immediately close the popup
             // with `closeOnClick: true`
             e.originalEvent.stopPropagation();
-            // setPopupInfo(city);
+            setPopupInfo(city);
           }}
         >
           <Pin />
@@ -54,7 +61,25 @@ export default function App()  {
       <NavigationControl position="top-left" />
       <ScaleControl />
       {pins}
-
+      {popupInfo && (
+        <Popup
+          anchor="top"
+          longitude={Number(popupInfo.longitude)}
+          latitude={Number(popupInfo.latitude)}
+          onClose={() => setPopupInfo({
+            city: '',
+            population: '',
+            image: '',
+            state: '',
+            latitude: 0,
+            longitude: 0
+          })}
+        >
+          <div>
+            {popupInfo.city}, {popupInfo.state}
+          </div>
+        </Popup>
+      )}
     </RMap>
   )
 }

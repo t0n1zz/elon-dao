@@ -14,6 +14,9 @@ import { NFTList } from "../const/NFTList";
 
 import Link from 'next/link'
 
+import { Country, State, City } from "country-state-city";
+import Select from "react-select";
+
 export async function getServerSideProps(context) {
   const session = await getSession(context);
   let isAutorized = false;
@@ -74,6 +77,9 @@ export async function getServerSideProps(context) {
 export default function User({ userSession, isAutorized, nftList }) {
   const router = useRouter();
   const [loading, setLoading] = useState(true);
+  const [selectedCountry, setSelectedCountry] = useState(null);
+  const [selectedState, setSelectedState] = useState(null);
+  const [selectedCity, setSelectedCity] = useState(null);
 
   useEffect(() => {
     !userSession ? router.push("/") : console.log(userSession);
@@ -164,21 +170,61 @@ export default function User({ userSession, isAutorized, nftList }) {
                   <div className="mb-5">
                     <label className="block font-bold text-gray-700 text-xs">Country</label>
                     <div className="inline-block relative w-80">
-                      <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-                        <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
-                      </div>
+                    <Select
+                        options={Country.getAllCountries()}
+                        getOptionLabel={(options) => {
+                          return options["name"];
+                        }}
+                        getOptionValue={(options) => {
+                          return options["name"];
+                        }}
+                        value={selectedCountry}
+                        onChange={(item) => {
+                          setSelectedCountry(item);
+                        }}
+                      />
                     </div>
                   </div>
     
                   <div className="mb-10">
+                    <label className="block font-bold text-gray-700 text-xs">State</label>
+                    <div className="inline-block relative w-80">
+                      <Select
+                        options={State?.getStatesOfCountry(selectedCountry?.isoCode)}
+                        getOptionLabel={(options) => {
+                          return options["name"];
+                        }}
+                        getOptionValue={(options) => {
+                          return options["name"];
+                        }}
+                        value={selectedState}
+                        onChange={(item) => {
+                          setSelectedState(item);
+                        }}
+                      />
+                    </div>
+                  </div>
+
+                  <div className="mb-10">
                     <label className="block font-bold text-gray-700 text-xs">City</label>
                     <div className="inline-block relative w-80">
-                      <select className="block appearance-none w-full py-2 px-3 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
-                        <option disabled>Select city</option>
-                      </select>
-                      <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-                        <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
-                      </div>
+                      <Select
+                        options={City.getCitiesOfState(
+                          selectedState?.countryCode,
+                          selectedState?.isoCode
+                        )}
+                        getOptionLabel={(options) => {
+                          return options["name"];
+                        }}
+                        getOptionValue={(options) => {
+                          return options["name"];
+                        }}
+                        value={selectedCity}
+                        onChange={(item) => {
+                          setSelectedCity(item);
+                          console.log(item);
+                        }}
+                      />
                     </div>
                   </div>
     
