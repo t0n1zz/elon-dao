@@ -24,7 +24,7 @@ export async function getServerSideProps(context) {
   const nftList = [];
   if (session) {
     const options = {
-      network: 'mainnet',
+      network: process.env.NEXT_PUBLIC_NETWORK,
       address: session.user.address,
     };
     const result = await axios.post(
