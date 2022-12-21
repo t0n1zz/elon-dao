@@ -6,21 +6,33 @@ import Map from '../components/Map'
 import Header from '../components/Header'
 import { useRouter } from 'next/router'
 import { useSession } from "next-auth/react";
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 
 import Image from 'next/image'
 import islandLogo from '../public/islandLogo.png'
 import dynamic from 'next/dynamic';
 
 import LoginBtn from "../components/loginBtn/loginBtn";
+import LogoutBtn from "../components/logoutBtn/logoutBtn";
+import Link from 'next/link'
 
 const Home: NextPage = () => {
   const router = useRouter();
   const { data: session, status } = useSession();
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    session && status === "authenticated" && router.push("./user");
-  }, [session, status]);
+    // session && status === "authenticated" && router.push("./user");
+    router.events.on("routeChangeError", (e) => setLoading(false));
+    router.events.on("routeChangeStart", (e) => setLoading(false));
+    router.events.on("routeChangeComplete", (e) => setLoading(true));
+
+    return () => {
+      router.events.off("routeChangeError", (e) => setLoading(false));
+      router.events.off("routeChangeStart", (e) => setLoading(false));
+      router.events.off("routeChangeComplete", (e) => setLoading(true));
+    };
+  }, [session, status, router.events]);
 
   return (
     <div>
@@ -33,13 +45,15 @@ const Home: NextPage = () => {
       <header className="sticky top-0 z-50 flex flex-row bg-white shadow-md p-5 md:px-10">
         {/* left */}
         <div className="md:basis-1/4  relative flex items-center h-10 cursor-pointer my-auto">
-          <Image 
-            src={islandLogo}
-            alt="islandLogo"
-            layout="fill"
-            objectFit="contain"
-            objectPosition="left"
-          />
+          <Link href={"/"} passHref>
+            <Image 
+              src={islandLogo}
+              alt="islandLogo"
+              layout="fill"
+              objectFit="contain"
+              objectPosition="left"
+            />
+          </Link>
         </div> 
 
         {/* middle */}
@@ -59,7 +73,33 @@ const Home: NextPage = () => {
           {!session ? (
             <LoginBtn />
           ) : (
-            <>Loading...</>
+            <>
+            { status == "authenticated" ?
+                <>
+                  {!loading ? 
+                    <button className="inline-block rounded-sm bg-blue-600 px-4 py-1.5 text-base font-semibold leading-7 text-white shadow-sm ring-1 ring-blue-600 hover:bg-blue-700 hover:ring-blue-700" disabled
+                    >
+                      Loading...
+                    </button>
+                    :
+                    <>
+                      <Link href={"/user"} passHref>
+                        <button className="inline-block rounded-sm bg-blue-600 px-4 py-1.5 text-base font-semibold leading-7 text-white shadow-sm ring-1 ring-blue-600 hover:bg-blue-700 hover:ring-blue-700"
+                        >
+                          Profile
+                        </button> 
+                      </Link>
+                      <LogoutBtn />
+                    </>
+                  }
+                </>
+              :
+                <button className="inline-block rounded-sm bg-blue-600 px-4 py-1.5 text-base font-semibold leading-7 text-white shadow-sm ring-1 ring-blue-600 hover:bg-blue-700 hover:ring-blue-700" disabled
+                >
+                  Loading...
+                </button>
+            }
+            </>
           )}
 
         </div>

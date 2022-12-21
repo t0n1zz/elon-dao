@@ -13,6 +13,7 @@ import islandLogo from '../public/islandLogo.png'
 import { NFTList } from "../const/NFTList";
 
 import countryList from 'react-select-country-list'
+import Link from 'next/link'
 
 export async function getServerSideProps(context) {
   const session = await getSession(context);
@@ -121,6 +122,12 @@ export default function User({ userSession, isAutorized, nftList }) {
 
           {/* right */}
           <div className="md:basis-1/4 flex items-center space-x-2 justify-end">
+            <Link href={"/"} passHref>
+              <button className="inline-block rounded-sm bg-blue-600 px-4 py-1.5 text-base font-semibold leading-7 text-white shadow-sm ring-1 ring-blue-600 hover:bg-blue-700 hover:ring-blue-700"
+              >
+                Home
+              </button> 
+            </Link>
             <LogoutBtn />
           </div>
         </header>
