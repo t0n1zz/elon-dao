@@ -12,7 +12,6 @@ import Map from '../components/Map';
 import islandLogo from '../public/islandLogo.png'
 import { NFTList } from "../const/NFTList";
 
-import countryList from 'react-select-country-list'
 import Link from 'next/link'
 
 export async function getServerSideProps(context) {
@@ -74,12 +73,6 @@ export async function getServerSideProps(context) {
 
 export default function User({ userSession, isAutorized, nftList }) {
   const router = useRouter();
-  const [countryValue, setCountryValue] = useState('')
-  const countrySelectOption = useMemo(() => countryList().getData(), [])
-
-  const changeHandler = value => {
-    setCountryValue(value)
-  }
 
   useEffect(() => {
     !userSession ? router.push("/") : console.log(userSession);
