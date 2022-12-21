@@ -73,7 +73,7 @@ export async function getServerSideProps(context) {
 
 export default function User({ userSession, isAutorized, nftList }) {
   const router = useRouter();
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     !userSession ? router.push("/") : console.log(userSession);

@@ -15,7 +15,7 @@
     "@solana/wallet-adapter-wallets": "^0.19.5",
     "@solana/web3.js": "^1.66.2",
     "fs": "^0.0.1-security",
-    "mapbox-gl": "^2.10.0",
+    "mapbox-gl": "^2.11.1",
     "moralis": "^2.10.0",
     "next": "latest",
     "next-auth": "^4.18.6",

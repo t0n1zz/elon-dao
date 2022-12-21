@@ -14,11 +14,12 @@ import dynamic from 'next/dynamic';
 import LoginBtn from "../components/loginBtn/loginBtn";
 import LogoutBtn from "../components/logoutBtn/logoutBtn";
 import Link from 'next/link'
+import 'mapbox-gl/dist/mapbox-gl.css';
 
 const Home: NextPage = () => {
   const router = useRouter();
   const { data: session, status } = useSession();
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     // session && status === "authenticated" && router.push("./user");
@@ -33,27 +34,26 @@ const Home: NextPage = () => {
     };
   }, [session, status, router.events]);
 
+  console.log(loading);
+
   return (
     <div>
       <Head>
         <title>Elon Dao</title>
         <link rel="icon" href="/favicon.ico" />
-        <link href="https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.css" rel="stylesheet"/>
       </Head>
 
       {/* header */}
       <header className="sticky top-0 z-50 flex flex-row bg-white shadow-md p-5 md:px-10">
         {/* left */}
-        <div className="md:basis-1/4  relative flex items-center h-10 cursor-pointer my-auto">
-          <Link href={"/"} passHref>
-            <Image 
-              src={islandLogo}
-              alt="islandLogo"
-              layout="fill"
-              objectFit="contain"
-              objectPosition="left"
-            />
-          </Link>
+        <div className="md:basis-1/4  relative flex items-center h-10 my-auto">
+          <Image 
+            src={islandLogo}
+            alt="islandLogo"
+            layout="fill"
+            objectFit="contain"
+            objectPosition="left"
+          />
         </div> 
 
         {/* middle */}
