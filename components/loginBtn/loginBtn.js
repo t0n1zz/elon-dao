@@ -6,7 +6,7 @@ export default function LoginBtn() {
     const provider = window.phantom?.solana;
     const resp = await provider.connect();
     const address = resp.publicKey.toString();
-    const chain = "devnet";
+    const chain = process.env.NEXT_PUBLIC_NETWORK;
     const account = {
       address: address,
       chain: chain,
@@ -28,6 +28,7 @@ export default function LoginBtn() {
       });
       push("/");
     } catch (e) {
+      console.log(e);
       return;
     }
   };
